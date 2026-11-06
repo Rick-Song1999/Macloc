@@ -9,8 +9,8 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/andyscott/macloc.git
-cd macloc
+git clone https://github.com/Rick-Song1999/Macloc.git
+cd Macloc
 
 # 1) 装模拟定位通道（弹一次管理员授权框，写偏好 + 重启 locationd）
 ./install.sh 39.904200 116.407400        # 北京
