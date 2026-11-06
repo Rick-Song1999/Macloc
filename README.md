@@ -48,6 +48,10 @@ open /Applications/MacLocBar.app          # 点一个城市按钮，3~6 秒生�
 全部是可逆的：`./stop.sh` 关掉模拟并恢复备份，`./install-login.sh --remove` 卸掉自启，
 `rm /Library/LaunchDaemons/com.macloc.agent.plist && launchctl bootout system/com.macloc.agent` 卸掉 daemon。
 
+> 仓库里 `tools/loctest-app.sh` 是**验证探针**：它会往自己的 TCC 数据库插一条「定位服务=允许」，
+> 好让一个第三方 App 能读到位置用来验证全局性。只对自己机器上的探针 App 生效，别的 App 碰不到。
+> 验证完可以 `./tools/loctest-app.sh clean` 清掉。
+
 请只在自己有权限的机器上使用。
 
 ---
