@@ -1,0 +1,29 @@
+# ---- 构建产物（都能用脚本重新生成，不进仓库）----
+# ./build-ui.sh 的打包产物
+/MacLocBar.app/
+# ./install-daemon.sh 编译的 root daemon
+/daemon/maclocd
+# UI 编译中间产物
+/ui/MacLocBar
+# tools/*.m 编译出来的工具
+/tools/click
+/tools/finddot
+/tools/makeicon
+/tools/makesheet
+/tools/menubarpos
+/tools/winid
+
+*.o
+*.dSYM/
+*.xcuserstate
+
+# ---- 运行时产物 ----
+verify.png
+*.log
+maclocd.log
+
+# ---- macOS ----
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
