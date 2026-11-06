@@ -13,6 +13,8 @@
 open /Applications/MacLocBar.app # 点一个城市，3~6 秒生效，全程不输密码
 ```
 
+<img src="docs/screenshot-panel.png" width="480" alt="MacLocBar 主窗口">
+
 ---
 
 ## 目录
@@ -532,6 +534,7 @@ macloc/
 ├── tools/click.m        模拟点击（自动化测试用）
 ├── tools/winid.m        打印 App 的 CGWindowNumber
 ├── tools/menubarpos.m   在截屏菜单栏里定位 MacLoc 图标
+├── docs/screenshot-panel.png  README 用的主窗口截图
 └── README.md
 ```
 

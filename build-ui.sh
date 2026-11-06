@@ -6,17 +6,26 @@
 #   ./build-ui.sh --local      安装到 ~/Applications（老位置，调试用）
 #
 # 产物：
-#   ~/macloc/MacLocBar.app     构建产物（可双击启动的菜单栏 App，LSUIElement）
-#   /Applications/MacLocBar.app  正式安装位置（和其它 App 待一起）
+#   /Applications/MacLocBar.app    正式安装位置（和其它 App 待一起）
+#
+# 注意：编译在临时目录里做，装完即删。
+# 因为 LaunchServices 会自动扫描磁盘上的 .app —— 同一个 bundle id 同时存在于两个路径时
+# （比如构建目录 + /Applications），Dock 就会出现两个 MacLocBar 图标。
+# 所以构建产物绝不留在用户可见的路径上。
 
 set -u
 cd "$(dirname "$0")"
 . ./lib/macloc.sh
 
 SRC="$MACLOC_DIR/ui/MacLocBar.swift"
-APP="$MACLOC_DIR/MacLocBar.app"
 APPS="/Applications"
 LOCAL_APPS="$HOME/Applications"
+
+# 编译用的临时暂存目录（装完自动删）
+STAGE_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/macloc-build.XXXXXX")"
+cleanup() { rm -rf "$STAGE_ROOT"; }
+trap cleanup EXIT
+APP="$STAGE_ROOT/MacLocBar.app"
 
 # App 的 bundle id：改它会换掉 UserDefaults（语言偏好）和「隐私与安全性」里的条目。
 # 想改成自己的：MACLOC_BUNDLE_ID=com.yourname.macloc ./build-ui.sh
@@ -57,10 +66,21 @@ cp "$MACLOC_DIR/ui/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns" 2>/dev/n
     || say_warn "没有 ui/AppIcon.icns（先跑 ./build-icon.sh）"
 
 codesign -s - -f --deep "$APP" >/dev/null 2>&1
-say_ok "已构建 $APP"
+say_ok "已构建（临时目录，装完自动清理）"
+
+# LaunchServices 注销工具：把某个 .app 从注册表里摘掉
+LSR="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+ls_unregister() { [ -x "$LSR" ] && "$LSR" -u "$1" >/dev/null 2>&1; }
 
 if [ "${1:-}" = "--no-install" ]; then
-    say_dim "跳过安装"
+    # 调试用：把产物留出来，但要提醒它会多出一个 Dock 图标
+    mkdir -p "$MACLOC_DIR/build"
+    rm -rf "$MACLOC_DIR/build/MacLocBar.app"
+    cp -R "$APP" "$MACLOC_DIR/build/MacLocBar.app"
+    ls_unregister "$MACLOC_DIR/build/MacLocBar.app"
+    say_dim "跳过安装，产物留在 $MACLOC_DIR/build/MacLocBar.app"
+    say_warn "这个副本也会被 LaunchServices 注册，Dock 可能出现第二个 MacLocBar 图标"
+    say_dim "用完删掉它：rm -rf $MACLOC_DIR/build/MacLocBar.app"
     exit 0
 fi
 

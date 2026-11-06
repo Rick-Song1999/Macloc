@@ -1,5 +1,7 @@
 # ---- 构建产物（都能用脚本重新生成，不进仓库）----
 # ./build-ui.sh 的打包产物
+/build/
+# 老版本把产物放在仓库根，留一条以防万一
 /MacLocBar.app/
 # ./install-daemon.sh 编译的 root daemon
 /daemon/maclocd

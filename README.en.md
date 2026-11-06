@@ -13,6 +13,8 @@ It changes `locationd`'s own simulated provider, so every program holding Locati
 open /Applications/MacLocBar.app # pick a city, effective in 3–6 s, no password prompt
 ```
 
+<img src="docs/screenshot-panel.png" width="480" alt="The MacLocBar main window">
+
 ---
 
 ## Table of contents
@@ -559,6 +561,7 @@ macloc/
 ├── tools/click.m        simulated clicks (for automation)
 ├── tools/winid.m        print the app's CGWindowNumber
 ├── tools/menubarpos.m   locate the MacLoc icon in a menu bar screenshot
+├── docs/screenshot-panel.png  the main-window screenshot used in this README
 └── README.md
 ```
 
