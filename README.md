@@ -551,8 +551,8 @@ macloc/
 | | |
 |---|---|
 | [Rick-Song1999](https://github.com/Rick-Song1999) | 项目发起、维护、打包发布 |
-| [anomalyco](https://github.com/anomalyco)（opencode） | 代码实现 |
-| [MiniMax-AI](https://github.com/MiniMax-AI) | 代码实现 |
+| [opencode-agent](https://github.com/opencode-agent) | 代码实现（opencode 编码助手） |
+| [MiniMax-AI-Dev](https://github.com/MiniMax-AI-Dev) | 代码实现（MiniMax 模型） |
 
 本仓库大部分代码由 AI 编码助手（opencode + MiniMax）编写。提交历史里的 `Co-authored-by` trailer
 就是 GitHub 贡献者归属用的，对应上面两个账号。

@@ -578,8 +578,8 @@ Runtime files:
 | | |
 |---|---|
 | [Rick-Song1999](https://github.com/Rick-Song1999) | project owner, maintenance, releases |
-| [anomalyco](https://github.com/anomalyco) (opencode) | implementation |
-| [MiniMax-AI](https://github.com/MiniMax-AI) | implementation |
+| [opencode-agent](https://github.com/opencode-agent) | implementation (the opencode coding agent) |
+| [MiniMax-AI-Dev](https://github.com/MiniMax-AI-Dev) | implementation (the MiniMax model) |
 
 Most of the code in this repository was written by AI coding agents (opencode + MiniMax). The
 `Co-authored-by` trailers in the commit history are what GitHub uses for contributor attribution,
